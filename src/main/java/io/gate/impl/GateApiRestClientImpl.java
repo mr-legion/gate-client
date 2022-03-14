@@ -2,6 +2,7 @@ package io.gate.impl;
 
 import io.gate.GateApiRestClient;
 import io.gate.domain.general.Asset;
+import io.gate.domain.market.MarketInfo;
 
 import java.util.List;
 
@@ -23,5 +24,12 @@ public class GateApiRestClientImpl implements GateApiRestClient {
     @Override
     public List<Asset> getAssets() {
         return executeSync(gateApiService.getAssets());
+    }
+
+    // Market endpoints
+
+    @Override
+    public List<MarketInfo> getMarketInfo() {
+        return executeSync(gateApiService.getMarketInfo());
     }
 }

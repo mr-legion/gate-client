@@ -2,6 +2,7 @@ package io.gate.impl;
 
 import io.gate.GateApiAsyncRestClient;
 import io.gate.domain.general.Asset;
+import io.gate.domain.market.MarketInfo;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -23,6 +24,15 @@ public class GateApiAsyncRestClientImpl implements GateApiAsyncRestClient {
     public CompletableFuture<List<Asset>> getAssets() {
         CompletableFuture<List<Asset>> future = new CompletableFuture<>();
         gateApiService.getAssets().enqueue(new RetrofitCallbackAdapter<>(future));
+        return future;
+    }
+
+    // Market endpoints
+
+    @Override
+    public CompletableFuture<List<MarketInfo>> getMarketInfo() {
+        CompletableFuture<List<MarketInfo>> future = new CompletableFuture<>();
+        gateApiService.getMarketInfo().enqueue(new RetrofitCallbackAdapter<>(future));
         return future;
     }
 }

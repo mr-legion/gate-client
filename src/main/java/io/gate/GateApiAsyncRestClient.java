@@ -1,6 +1,7 @@
 package io.gate;
 
 import io.gate.domain.general.Asset;
+import io.gate.domain.market.MarketInfo;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -18,5 +19,14 @@ public interface GateApiAsyncRestClient {
      * @return assets
      */
     CompletableFuture<List<Asset>> getAssets();
+
+    // Market endpoints
+
+    /**
+     * Get all supported markets (asynchronous).
+     *
+     * @return markets info
+     */
+    CompletableFuture<List<MarketInfo>> getMarketInfo();
 
 }

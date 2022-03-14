@@ -1,6 +1,7 @@
 package io.gate.impl;
 
 import io.gate.domain.general.Asset;
+import io.gate.domain.market.MarketInfo;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -15,5 +16,10 @@ public interface GateApiService {
 
     @GET("/api/v4/spot/currencies")
     Call<List<Asset>> getAssets();
+
+    // Market endpoints
+
+    @GET("/api/v4/spot/currency_pairs")
+    Call<List<MarketInfo>> getMarketInfo();
 
 }

@@ -1,6 +1,7 @@
 package io.gate;
 
 import io.gate.domain.general.Asset;
+import io.gate.domain.market.MarketInfo;
 
 import java.util.List;
 
@@ -17,5 +18,14 @@ public interface GateApiRestClient {
      * @return assets
      */
     List<Asset> getAssets();
+
+    // Market endpoints
+
+    /**
+     * Get all supported markets.
+     *
+     * @return market info
+     */
+    List<MarketInfo> getMarketInfo();
 
 }
