@@ -1,5 +1,6 @@
 package io.gate;
 
+import io.gate.domain.account.Transaction;
 import io.gate.domain.general.Asset;
 import io.gate.domain.market.MarketInfo;
 import io.gate.domain.market.MarketTicker;
@@ -47,5 +48,19 @@ public interface GateApiRestClient {
      * @return orderbook
      */
     OrderBook getOrderBook(String market, Integer interval, Integer limit, Boolean withId);
+
+    // Account endpoints
+
+    /**
+     * Get deposits records.
+     *
+     * @param asset  filter by asset symbol. Return all assets records if not specified.
+     * @param from   time range beginning, default to 7 days before current time
+     * @param to     time range ending, default to current time
+     * @param limit  maximum number of records to be returned in a single list
+     * @param offset list offset, starting from 0
+     * @return deposits records
+     */
+    List<Transaction> getDeposits(String asset, Long from, Long to, Integer limit, Integer offset);
 
 }

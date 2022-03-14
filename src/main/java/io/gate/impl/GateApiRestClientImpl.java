@@ -1,6 +1,7 @@
 package io.gate.impl;
 
 import io.gate.GateApiRestClient;
+import io.gate.domain.account.Transaction;
 import io.gate.domain.general.Asset;
 import io.gate.domain.market.MarketInfo;
 import io.gate.domain.market.MarketTicker;
@@ -43,5 +44,12 @@ public class GateApiRestClientImpl implements GateApiRestClient {
     @Override
     public OrderBook getOrderBook(String market, Integer interval, Integer limit, Boolean withId) {
         return executeSync(gateApiService.getOrderBook(market, interval, limit, withId));
+    }
+
+    // Account endpoints
+
+    @Override
+    public List<Transaction> getDeposits(String asset, Long from, Long to, Integer limit, Integer offset) {
+        return executeSync(gateApiService.getDeposits(asset, from, to, limit, offset));
     }
 }

@@ -1,6 +1,7 @@
 package io.gate.impl;
 
 import io.gate.GateApiAsyncRestClient;
+import io.gate.domain.account.Transaction;
 import io.gate.domain.general.Asset;
 import io.gate.domain.market.MarketInfo;
 import io.gate.domain.market.MarketTicker;
@@ -49,6 +50,15 @@ public class GateApiAsyncRestClientImpl implements GateApiAsyncRestClient {
     public CompletableFuture<OrderBook> getOrderBook(String market, Integer interval, Integer limit, Boolean withId) {
         CompletableFuture<OrderBook> future = new CompletableFuture<>();
         gateApiService.getOrderBook(market, interval, limit, withId).enqueue(new RetrofitCallbackAdapter<>(future));
+        return future;
+    }
+
+    // Account endpoints
+
+    @Override
+    public CompletableFuture<List<Transaction>> getDeposits(String asset, Long from, Long to, Integer limit, Integer offset) {
+        CompletableFuture<List<Transaction>> future = new CompletableFuture<>();
+        gateApiService.getDeposits(asset, from, to, limit, offset).enqueue(new RetrofitCallbackAdapter<>(future));
         return future;
     }
 }

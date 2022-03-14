@@ -2,6 +2,8 @@ package io.gate.impl;
 
 import io.gate.GateApiError;
 import io.gate.exception.GateApiException;
+import io.gate.security.ApiCredentials;
+import io.gate.security.AuthenticationInterceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -33,13 +35,27 @@ public class GateApiServiceGenerator {
     }
 
     public <S> S createService(Class<S> serviceClass) {
+        return createService(serviceClass, null);
+    }
 
-        Retrofit retrofit = new Retrofit.Builder()
+    public <S> S createService(Class<S> serviceClass, ApiCredentials apiCredentials) {
+
+        Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
                 .baseUrl(API_BASE_URL)
-                .addConverterFactory(converterFactory)
-                .client(client)
-                .build();
+                .addConverterFactory(converterFactory);
 
+        if (apiCredentials == null) {
+            retrofitBuilder.client(client);
+        } else {
+            // `adaptedClient` will use its own interceptor, but share thread pool etc with the 'parent' client
+            AuthenticationInterceptor authInterceptor = new AuthenticationInterceptor(apiCredentials);
+            OkHttpClient.Builder newBuilder = client.newBuilder();
+            newBuilder.interceptors().add(0, authInterceptor);
+            OkHttpClient adaptedClient = newBuilder.build();
+            retrofitBuilder.client(adaptedClient);
+        }
+
+        Retrofit retrofit = retrofitBuilder.build();
         return retrofit.create(serviceClass);
     }
 
