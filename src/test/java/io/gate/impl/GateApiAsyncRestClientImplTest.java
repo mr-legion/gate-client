@@ -4,6 +4,7 @@ import io.gate.GateApiAsyncRestClient;
 import io.gate.GateApiClientFactory;
 import io.gate.domain.general.Asset;
 import io.gate.domain.market.MarketInfo;
+import io.gate.domain.market.MarketTicker;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -26,5 +27,11 @@ public class GateApiAsyncRestClientImplTest {
     public void getMarketInfo_ShouldReturnMarketInfo() throws ExecutionException, InterruptedException {
         List<MarketInfo> marketInfoList = gateApiAsyncRestClient.getMarketInfo().get();
         assertThat(marketInfoList, allOf(notNullValue(), is(not(empty()))));
+    }
+
+    @Test
+    public void getMarketTickers_ShouldReturnMarketTickers() throws ExecutionException, InterruptedException {
+        List<MarketTicker> marketTickers = gateApiAsyncRestClient.getMarketTickers().get();
+        assertThat(marketTickers, allOf(notNullValue(), is(not(empty()))));
     }
 }

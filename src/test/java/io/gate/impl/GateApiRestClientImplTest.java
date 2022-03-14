@@ -4,6 +4,7 @@ import io.gate.GateApiClientFactory;
 import io.gate.GateApiRestClient;
 import io.gate.domain.general.Asset;
 import io.gate.domain.market.MarketInfo;
+import io.gate.domain.market.MarketTicker;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -25,5 +26,11 @@ public class GateApiRestClientImplTest {
     public void getMarketInfo_ShouldReturnMarketInfo() {
         List<MarketInfo> marketInfoList = gateApiRestClient.getMarketInfo();
         assertThat(marketInfoList, allOf(notNullValue(), is(not(empty()))));
+    }
+
+    @Test
+    public void getMarketTickers_ShouldReturnMarketTickers() {
+        List<MarketTicker> marketTickers = gateApiRestClient.getMarketTickers();
+        assertThat(marketTickers, allOf(notNullValue(), is(not(empty()))));
     }
 }
