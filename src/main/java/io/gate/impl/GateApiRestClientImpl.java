@@ -4,6 +4,7 @@ import io.gate.GateApiRestClient;
 import io.gate.domain.general.Asset;
 import io.gate.domain.market.MarketInfo;
 import io.gate.domain.market.MarketTicker;
+import io.gate.domain.market.OrderBook;
 
 import java.util.List;
 
@@ -37,5 +38,10 @@ public class GateApiRestClientImpl implements GateApiRestClient {
     @Override
     public List<MarketTicker> getMarketTickers() {
         return executeSync(gateApiService.getMarketTickers());
+    }
+
+    @Override
+    public OrderBook getOrderBook(String market, Integer interval, Integer limit, Boolean withId) {
+        return executeSync(gateApiService.getOrderBook(market, interval, limit, withId));
     }
 }

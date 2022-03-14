@@ -5,6 +5,7 @@ import io.gate.GateApiClientFactory;
 import io.gate.domain.general.Asset;
 import io.gate.domain.market.MarketInfo;
 import io.gate.domain.market.MarketTicker;
+import io.gate.domain.market.OrderBook;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.concurrent.ExecutionException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class GateApiAsyncRestClientImplTest {
 
@@ -33,5 +35,13 @@ public class GateApiAsyncRestClientImplTest {
     public void getMarketTickers_ShouldReturnMarketTickers() throws ExecutionException, InterruptedException {
         List<MarketTicker> marketTickers = gateApiAsyncRestClient.getMarketTickers().get();
         assertThat(marketTickers, allOf(notNullValue(), is(not(empty()))));
+    }
+
+    @Test
+    public void getOrderBook_ShouldReturnOrderBookForBTCUSDT() throws ExecutionException, InterruptedException {
+        OrderBook orderBook = gateApiAsyncRestClient.getOrderBook("BTC_USDT", 0, 10, true).get();
+        assertNotNull(orderBook);
+        assertThat(orderBook.getAsks(), is(not(empty())));
+        assertThat(orderBook.getBids(), is(not(empty())));
     }
 }

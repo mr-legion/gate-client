@@ -5,12 +5,14 @@ import io.gate.GateApiRestClient;
 import io.gate.domain.general.Asset;
 import io.gate.domain.market.MarketInfo;
 import io.gate.domain.market.MarketTicker;
+import io.gate.domain.market.OrderBook;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class GateApiRestClientImplTest {
 
@@ -32,5 +34,13 @@ public class GateApiRestClientImplTest {
     public void getMarketTickers_ShouldReturnMarketTickers() {
         List<MarketTicker> marketTickers = gateApiRestClient.getMarketTickers();
         assertThat(marketTickers, allOf(notNullValue(), is(not(empty()))));
+    }
+
+    @Test
+    public void getOrderBook_ShouldReturnOrderBookForBTCUSDT() {
+        OrderBook orderBook = gateApiRestClient.getOrderBook("BTC_USDT", 0, 10, true);
+        assertNotNull(orderBook);
+        assertThat(orderBook.getAsks(), is(not(empty())));
+        assertThat(orderBook.getBids(), is(not(empty())));
     }
 }
