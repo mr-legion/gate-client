@@ -1,7 +1,5 @@
 package io.gate.constant;
 
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 /**
  * Constants used throughout Gate's API.
  */
@@ -17,7 +15,8 @@ public class GateApiConstants {
      */
     public static final String API_BASE_DOMAIN = "gateio.ws";
 
-    /**Спланувати бюджет на рік
+    /**
+     * Спланувати бюджет на рік
      * Web base URL.
      */
     public static final String WEB_BASE_URL = "https://www." + BASE_DOMAIN;
@@ -39,9 +38,4 @@ public class GateApiConstants {
      */
     public static final String AUTHORIZATION_REQUIRED = "AUTHORIZATION";
     public static final String AUTHORIZATION_REQUIRED_HEADER = AUTHORIZATION_REQUIRED + ": #";
-
-    /**
-     * Default ToStringStyle used by toString methods.
-     */
-    public static final ToStringStyle TO_STRING_BUILDER_STYLE = ToStringStyle.SHORT_PREFIX_STYLE;
 }

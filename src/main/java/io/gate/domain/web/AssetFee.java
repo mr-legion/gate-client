@@ -3,12 +3,16 @@ package io.gate.domain.web;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.gate.constant.GateApiConstants;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 
 /**
  * Asset fee information.
  */
+@Getter
+@EqualsAndHashCode
+@ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AssetFee {
 
@@ -36,31 +40,5 @@ public class AssetFee {
         }
         this.fixedWithdrawFee = fixedWithdrawalFee;
         this.ratioWithdrawFee = Double.parseDouble(ratioWithdrawalFee.replace("%", ""));
-    }
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public String getNetwork() {
-        return network;
-    }
-
-    public Double getFixedWithdrawFee() {
-        return fixedWithdrawFee;
-    }
-
-    public Double getRatioWithdrawFee() {
-        return ratioWithdrawFee;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, GateApiConstants.TO_STRING_BUILDER_STYLE)
-                .append("symbol", symbol)
-                .append("network", network)
-                .append("fixedWithdrawFee", fixedWithdrawFee)
-                .append("ratioWithdrawFee", ratioWithdrawFee)
-                .toString();
     }
 }
