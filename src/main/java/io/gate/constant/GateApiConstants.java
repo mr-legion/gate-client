@@ -1,8 +1,11 @@
 package io.gate.constant;
 
+import lombok.experimental.UtilityClass;
+
 /**
  * Constants used throughout Gate's API.
  */
+@UtilityClass
 public class GateApiConstants {
 
     /**

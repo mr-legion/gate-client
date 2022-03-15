@@ -1,5 +1,6 @@
 package io.gate.security;
 
+import lombok.experimental.UtilityClass;
 import org.apache.commons.codec.binary.Hex;
 
 import javax.crypto.Mac;
@@ -11,6 +12,7 @@ import static org.apache.commons.codec.digest.HmacAlgorithms.HMAC_SHA_512;
 /**
  * Utility class to sign messages using HMAC-SHA512.
  */
+@UtilityClass
 public final class HmacSHA512Signer {
 
     /**
