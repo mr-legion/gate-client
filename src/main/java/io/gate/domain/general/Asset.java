@@ -16,18 +16,18 @@ public class Asset {
     @JsonProperty("currency")
     private String symbol;
 
-    private boolean delisted;
+    private Boolean delisted;
 
     @JsonProperty("trade_disabled")
-    private boolean tradeDisabled;
+    private Boolean tradeDisabled;
 
     @JsonProperty("deposit_disabled")
-    private boolean depositDisabled;
+    private Boolean depositDisabled;
 
     @JsonProperty("withdraw_disabled")
-    private boolean withdrawDisabled;
+    private Boolean withdrawDisabled;
 
     @JsonProperty("withdraw_delayed")
-    private boolean withdrawDelayed;
+    private Boolean withdrawDelayed;
 
 }

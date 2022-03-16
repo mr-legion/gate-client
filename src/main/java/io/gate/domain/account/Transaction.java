@@ -26,7 +26,7 @@ public class Transaction {
     private String asset;
 
     @JsonProperty("amount")
-    private double quantity;
+    private Double quantity;
 
     private String address;
     private String memo;

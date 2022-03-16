@@ -49,21 +49,21 @@ public class MarketInfo {
     /**
      * Price scale.
      */
-    private int precision;
+    private Integer precision;
 
     /**
      * Amount scale.
      */
-    private int amountPrecision;
+    private Integer amountPrecision;
 
     /**
      * Sell start unix timestamp in seconds.
      */
-    private long sellStart;
+    private Long sellStart;
 
     /**
      * Buy start unix timestamp in seconds.
      */
-    private long buyStart;
+    private Long buyStart;
 
 }

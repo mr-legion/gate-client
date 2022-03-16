@@ -22,12 +22,12 @@ public class OrderBook {
     /**
      * The timestamp of the response data being generated (in milliseconds).
      */
-    private long current;
+    private Long current;
 
     /**
      * The timestamp of when the orderbook last changed (in milliseconds).
      */
-    private long update;
+    private Long update;
 
     private List<Order> asks;
     private List<Order> bids;
