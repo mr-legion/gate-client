@@ -14,18 +14,31 @@ public class GateApiClientFactory {
 
     private final GateApiServiceGenerator serviceGenerator;
 
-    private final ApiCredentials apiCredentials;
+    private ApiCredentials apiCredentials;
 
     public GateApiClientFactory() {
-        this(new OkHttpClient(), null);
+        this.serviceGenerator = new GateApiServiceGenerator(new OkHttpClient());
     }
 
     public GateApiClientFactory(ApiCredentials apiCredentials) {
-        this(new OkHttpClient(), apiCredentials);
+        this.serviceGenerator = new GateApiServiceGenerator(new OkHttpClient());
+        this.apiCredentials = apiCredentials;
     }
 
-    private GateApiClientFactory(OkHttpClient client, ApiCredentials apiCredentials) {
-        this.serviceGenerator = new GateApiServiceGenerator(client);
+    public GateApiClientFactory(ApiCredentials apiCredentials, ApiInteractionConfig apiInteractionConfig) {
+        this(new OkHttpClient(), apiCredentials, apiInteractionConfig);
+    }
+
+    private GateApiClientFactory(OkHttpClient client,
+                                 ApiCredentials apiCredentials,
+                                 ApiInteractionConfig apiInteractionConfig) {
+        OkHttpClient newClient = client.newBuilder()
+                .proxySelector(new CustomProxySelector(apiInteractionConfig.getProxies()))
+                .addInterceptor(new RateLimitInterceptor(
+                        apiInteractionConfig.getMaxRequestsPerSecond(),
+                        apiInteractionConfig.getMaxApiKeyUsagePerSecond()
+                )).build();
+        this.serviceGenerator = new GateApiServiceGenerator(newClient);
         this.apiCredentials = apiCredentials;
     }
 
