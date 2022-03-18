@@ -1,5 +1,7 @@
 package io.gate.impl;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.gate.GateApiError;
 import io.gate.exception.GateApiException;
 import io.gate.security.ApiCredentials;
@@ -22,11 +24,16 @@ import static io.gate.constant.GateApiConstants.API_BASE_URL;
  */
 public class GateApiServiceGenerator {
 
-    private static final Converter.Factory converterFactory = JacksonConverterFactory.create();
+    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final Converter.Factory converterFactory = JacksonConverterFactory.create(mapper);
     @SuppressWarnings("unchecked")
     private static final Converter<ResponseBody, GateApiError> errorBodyConverter =
             (Converter<ResponseBody, GateApiError>) converterFactory.responseBodyConverter(
                     GateApiError.class, new Annotation[0], null);
+
+    static {
+        mapper.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL);
+    }
 
     private final OkHttpClient client;
 
