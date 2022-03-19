@@ -29,9 +29,9 @@ public class GateApiClientFactory {
         this(new OkHttpClient(), apiCredentials, apiInteractionConfig);
     }
 
-    private GateApiClientFactory(OkHttpClient client,
-                                 ApiCredentials apiCredentials,
-                                 ApiInteractionConfig apiInteractionConfig) {
+    public GateApiClientFactory(OkHttpClient client,
+                                ApiCredentials apiCredentials,
+                                ApiInteractionConfig apiInteractionConfig) {
         OkHttpClient newClient = client.newBuilder()
                 .proxySelector(new CustomProxySelector(apiInteractionConfig.getProxies()))
                 .addInterceptor(new RateLimitInterceptor(
